@@ -7,28 +7,13 @@ import static consoleUtils.ConsoleUtils.printLine;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class UniqueScatter {
-    private static final @NotNull ApproximationType
-            DEFAULT_APPROXIMATION_TYPE = ApproximationType.LINEAR;
-
-    private @NotNull ApproximationType
-            approximationType = DEFAULT_APPROXIMATION_TYPE;
+public abstract class UniqueScatter extends AbstractApproximableScatter {
     public final @NotNull Map<@NotNull Integer, @NotNull SimpleRecord> data;
 
     //creates new data container with custom approximation type
     public UniqueScatter(@Nullable ApproximationType approximationType) {
+        super(approximationType);
         data = new HashMap<>();
-        setApproximationType(approximationType);
-    }
-
-    public void setApproximationType(@Nullable ApproximationType approximationType) {
-        this.approximationType = Objects.requireNonNullElse(
-                approximationType,
-                DEFAULT_APPROXIMATION_TYPE);
-    }
-
-    public @NotNull ApproximationType getApproximationType() {
-        return approximationType;
     }
 
     //adds new records, overwrites if duplicate
