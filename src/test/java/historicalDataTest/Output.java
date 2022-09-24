@@ -9,14 +9,24 @@ import static consoleUtils.NumberFormatter.doubleToString;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+/**
+ * A class for managing output for the HistoricalDataTest.
+ */
 class Output {
-    //reference
-    private final @NotNull HistoricalData data;
+    private final @NotNull HistoricalData data; //reference
 
+    /**
+     * Creates a new Output object.
+     *
+     * @param data A HistoricalData object for reference.
+     */
     protected Output(@NotNull HistoricalData data) {
         this.data = data;
     }
 
+    /**
+     * Prints bounds of the historical data.
+     */
     protected void printBounds() {
         int @Nullable [] bounds = data.getBounds();
         String commonString = "Bounds: ";
@@ -27,6 +37,11 @@ class Output {
         }
     }
 
+    /**
+     * Prints information about a selected year.
+     *
+     * @param year The year.
+     */
     protected void printYearInfo(int year) {
         printSeparator();
         printLine("Desired year:" + year);

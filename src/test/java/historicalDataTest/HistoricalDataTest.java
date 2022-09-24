@@ -14,7 +14,8 @@ public class HistoricalDataTest {
             TESTABLE_YEARS = new int[] {5, 10, 17, 30};
     private static final @NotNull HistoricalData
             historicalData = new HistoricalData();
-    private static final @NotNull Output output = new Output(historicalData);
+    private static final @NotNull Output
+            output = new Output(historicalData);
 
     /**
      * Main method of this test.
