@@ -1,7 +1,7 @@
-package statisticsTest;
+package historicalDataTest;
 
-import abstractStatistics.Statistics;
-import abstractStatistics.Statistics.HistoricalData;
+import historicalData.Record;
+import historicalData.HistoricalData;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -9,7 +9,7 @@ import static consoleUtils.ConsoleUtils.printLine;
 import static consoleUtils.ConsoleUtils.printSeparator;
 import static consoleUtils.NumberFormatter.doubleToString;
 
-public class StatisticsTest {
+public class HistoricalDataTest {
     private static final int
             DESIRED_YEAR_BEFORE = 5,
             DESIRED_YEAR_EXACT = 10,
@@ -28,10 +28,10 @@ public class StatisticsTest {
 
     private static void prepareHistoricalData() {
         printBounds();
-        historicalData.add(10, new Statistics.Record(100));
-        historicalData.add(15, new Statistics.Record(150));
-        historicalData.add(20, new Statistics.Record(200));
-        historicalData.add(12, new Statistics.Record(120));
+        historicalData.add(10, new Record(100));
+        historicalData.add(15, new Record(150));
+        historicalData.add(20, new Record(200));
+        historicalData.add(12, new Record(120));
         printBounds();
     }
 
