@@ -1,11 +1,15 @@
 package historicalData;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.*;
+import java.util.Arrays;
+import java.util.Objects;
+import java.util.Set;
+import java.util.Map;
+import java.util.HashMap;
 
 import static consoleUtils.ConsoleUtils.printLine;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class HistoricalData {
     public enum ApproximationType {
@@ -118,5 +122,4 @@ public class HistoricalData {
                 containedYears[prevYearIndex],
                 containedYears[prevYearIndex + 1]};
     }
-
 }
