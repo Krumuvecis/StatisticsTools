@@ -5,30 +5,42 @@ import historicalData.HistoricalData;
 
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * A general test for HistoricalData object.
+ */
 public class HistoricalDataTest {
-    private static final int
-            DESIRED_YEAR_BEFORE = 5,
-            DESIRED_YEAR_EXACT = 10,
-            DESIRED_YEAR_WITHIN = 17,
-            DESIRED_YEAR_AFTER = 30;
+    private static final int[]
+            RECORDED_YEARS = new int[] {10, 15, 20, 12},
+            TESTABLE_YEARS = new int[] {5, 10, 17, 30};
     private static final @NotNull HistoricalData
             historicalData = new HistoricalData();
     private static final @NotNull Output output = new Output(historicalData);
 
+    /**
+     * Main method of this test.
+     * Run this to test.
+     *
+     * @param args Command-line arguments
+     */
     public static void main(String[] args) {
-        prepareHistoricalData();
-        output.printYearInfo(DESIRED_YEAR_BEFORE);
-        output.printYearInfo(DESIRED_YEAR_EXACT);
-        output.printYearInfo(DESIRED_YEAR_WITHIN);
-        output.printYearInfo(DESIRED_YEAR_AFTER);
+        output.printBounds();
+        addYears();
+        output.printBounds();
+        printYears();
     }
 
-    private static void prepareHistoricalData() {
-        output.printBounds();
-        historicalData.add(10, new SimpleRecord(100));
-        historicalData.add(15, new SimpleRecord(150));
-        historicalData.add(20, new SimpleRecord(200));
-        historicalData.add(12, new SimpleRecord(120));
-        output.printBounds();
+    private static void addYears() {
+        double valueCoefficient = 10.0;
+        for (int year : RECORDED_YEARS) {
+            historicalData.add(
+                    year,
+                    new SimpleRecord(year * valueCoefficient));
+        }
+    }
+
+    private static void printYears() {
+        for (int year : TESTABLE_YEARS) {
+            output.printYearInfo(year);
+        }
     }
 }
