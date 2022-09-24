@@ -67,21 +67,10 @@ public abstract class UniqueScatter extends AbstractApproximableScatter {
                     return data.get(key).getValue();
                 } else {
                     int @NotNull [] closest = getTwoClosestKeys(key);
-                    switch (getApproximationType()) {
-                        case LOWER -> {
-                            return closest[0];
-                        }
-                        case UPPER -> {
-                            return closest[1];
-                        }
-                        case LINEAR -> {
-                            double position = (key - closest[0]) / (double) (closest[1] - closest[0]);
-                            double deltaValue = data.get(closest[1]).getValue() - data.get(closest[0]).getValue();
-                            double myDelta = deltaValue * position;
-                            return data.get(closest[0]).getValue() + myDelta;
-                        }
-                        default -> throw new IllegalStateException();
-                    }
+                    return getApproximateValue(
+                            key,
+                            closest[0], data.get(closest[0]).getValue(),
+                            closest[1], data.get(closest[1]).getValue());
                 }
             }
         }

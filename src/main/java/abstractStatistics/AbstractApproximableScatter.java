@@ -25,4 +25,25 @@ abstract class AbstractApproximableScatter {
     public @NotNull ApproximationType getApproximationType() {
         return approximationType;
     }
+
+    public double getApproximateValue(int x,
+                                      int x1, double y1,
+                                      int x2, double y2)
+            throws IllegalStateException {
+        switch (getApproximationType()) {
+            case LOWER -> {
+                return y1;
+            }
+            case UPPER -> {
+                return y2;
+            }
+            case LINEAR -> {
+                double position = (x - x1) / (double) (x2 - x1);
+                double dy = y2 - y1;
+                double dTotal = dy * position;
+                return y1 + dTotal;
+            }
+            default -> throw new IllegalStateException();
+        }
+    }
 }
