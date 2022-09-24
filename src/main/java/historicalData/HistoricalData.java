@@ -12,17 +12,12 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class HistoricalData {
-    public enum ApproximationType {
-        LOWER,
-        UPPER,
-        LINEAR
-    }
-
-    private static final @NotNull HistoricalData.ApproximationType
+    private static final @NotNull ApproximationType
             DEFAULT_APPROXIMATION_TYPE = ApproximationType.LINEAR;
 
-    private @NotNull HistoricalData.ApproximationType approximationType;
-    private final @NotNull Map<@NotNull Integer, @NotNull Record> data;
+    private @NotNull ApproximationType
+            approximationType = DEFAULT_APPROXIMATION_TYPE;
+    private final @NotNull Map<@NotNull Integer, @NotNull SimpleRecord> data;
 
     //creates new data container with default approximation type
     public HistoricalData() {
@@ -30,19 +25,19 @@ public class HistoricalData {
     }
 
     //creates new data container with custom approximation type
-    public HistoricalData(@Nullable HistoricalData.ApproximationType approximationType) {
+    public HistoricalData(@Nullable ApproximationType approximationType) {
         data = new HashMap<>();
         setApproximationType(approximationType);
     }
 
-    public void setApproximationType(@Nullable HistoricalData.ApproximationType approximationType) {
+    public void setApproximationType(@Nullable ApproximationType approximationType) {
         this.approximationType = Objects.requireNonNullElse(
                 approximationType,
                 DEFAULT_APPROXIMATION_TYPE);
     }
 
     //adds new records, overwrites if duplicate year
-    public void add(int year, @Nullable Record record) {
+    public void add(int year, @Nullable SimpleRecord record) {
         if (record != null) {
             data.put(year, record);
         } else {
@@ -89,7 +84,7 @@ public class HistoricalData {
                 throw new IndexOutOfBoundsException();
             } else {
                 if (data.containsKey(year)) {
-                    return data.get(year).value;
+                    return data.get(year).getValue();
                 } else {
                     int @NotNull [] closest = getTwoClosestYears(year);
                     switch (approximationType) {
@@ -101,9 +96,9 @@ public class HistoricalData {
                         }
                         case LINEAR -> {
                             double position = (year - closest[0]) / (double) (closest[1] - closest[0]);
-                            double deltaValue = data.get(closest[1]).value - data.get(closest[0]).value;
+                            double deltaValue = data.get(closest[1]).getValue() - data.get(closest[0]).getValue();
                             double myDelta = deltaValue * position;
-                            return data.get(closest[0]).value + myDelta;
+                            return data.get(closest[0]).getValue() + myDelta;
                         }
                         default -> throw new IllegalStateException();
                     }

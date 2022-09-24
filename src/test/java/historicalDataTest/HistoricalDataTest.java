@@ -1,6 +1,6 @@
 package historicalDataTest;
 
-import historicalData.Record;
+import historicalData.SimpleRecord;
 import historicalData.HistoricalData;
 
 import org.jetbrains.annotations.NotNull;
@@ -25,10 +25,10 @@ public class HistoricalDataTest {
 
     private static void prepareHistoricalData() {
         output.printBounds();
-        historicalData.add(10, new Record(100));
-        historicalData.add(15, new Record(150));
-        historicalData.add(20, new Record(200));
-        historicalData.add(12, new Record(120));
+        historicalData.add(10, new SimpleRecord(100));
+        historicalData.add(15, new SimpleRecord(150));
+        historicalData.add(20, new SimpleRecord(200));
+        historicalData.add(12, new SimpleRecord(120));
         output.printBounds();
     }
 }
