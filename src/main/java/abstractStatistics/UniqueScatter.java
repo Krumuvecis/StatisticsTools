@@ -47,7 +47,7 @@ public abstract class UniqueScatter extends AbstractApproximableScatter {
         return orderedKeys;
     }
 
-    public double getLastValue() throws IllegalStateException {
+    public int getLastKey() throws IllegalStateException {
         Integer[] orderedKeys = getOrderedKeys();
         return orderedKeys[orderedKeys.length - 1];
     }
