@@ -1,4 +1,4 @@
-package historicalData;
+package abstractStatistics;
 
 //
 public class SimpleRecord {

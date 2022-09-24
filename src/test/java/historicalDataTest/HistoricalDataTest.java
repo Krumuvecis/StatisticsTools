@@ -1,6 +1,6 @@
 package historicalDataTest;
 
-import historicalData.SimpleRecord;
+import abstractStatistics.SimpleRecord;
 import historicalData.HistoricalData;
 
 import org.jetbrains.annotations.NotNull;
